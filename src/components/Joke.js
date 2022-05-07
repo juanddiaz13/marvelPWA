@@ -6,19 +6,7 @@ export const Joke = () => {
 
 
   useEffect(() => {
-      if(!navigator.onLine){
-          if(localStorage.getItem("marvel")==null){
-              setMarvel("Loading...")
-          }
-          else{
-            setMarvel(localStorage.getItem("marvel"));
-          }
-      }
-      else {
-          console.log("Entra entra")
-            fetchMarvel()
-    }
-    //fetchJoke();
+    fetchMarvel();
   }, []);
 
   const fetchMarvel = async (marker) => {
@@ -26,7 +14,6 @@ export const Joke = () => {
     const resp = await fetch(url);
     const data = await resp.json();
     setMarvel(data.data.results[0].name);
-    localStorage.setItem("marvel", data.data.results[0].name);
   };
 
   console.log(marvel)
@@ -34,6 +21,7 @@ export const Joke = () => {
         <>
         <h1>Marvel</h1>
         <p>{marvel}</p>
+        <p>Toma el nombre del primer personaje obtenido con la API de Marvel.</p>
         </>
     )
 }
